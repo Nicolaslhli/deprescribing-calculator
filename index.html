@@ -10,9 +10,31 @@
       font-family: 'Quicksand', sans-serif;
       background: linear-gradient(to right, #c2e9fb, #a1c4fd);
       color: #333;
-      max-width: 900px;
-      margin: 0 auto;
+      margin: 0;
       padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      max-width: 1400px;
+      width: 100%;
+    }
+    .sidebar {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 350px;
+      font-size: 0.95rem;
+      overflow-y: auto;
+      max-height: 90vh;
+    }
+    .main-content {
+      flex: 1;
+      max-width: 900px;
     }
     h1 {
       color: #1e3a8a;
@@ -68,7 +90,7 @@
       font-size: 1.1rem;
     }
   </style>
-  <script>
+<script>
     const classData = {
       "benzodiazepine": {
           recommendation: "May be deprescribed due to risks of falls, cognitive impairment, and sedation.",
@@ -192,33 +214,64 @@
      }
     
   </script>
+
 </head>
 <body>
-  <h1>Deprescribing Tool</h1>
-  <div class="form-section">
-    <label for="age"><span class="classkey">Patient Age:</span></label>
-    <input type="number" id="age" class="classdata" />
-    <label for="weight"><span class="classkey">Patient Weight (kg):</span></label>
-    <input type="number" id="weight" class="classdata" />
-    <label for="conditions"><span class="classkey">Chronic Conditions (comma separated):</span></label>
-    <textarea id="conditions" class="classdata" rows="2" placeholder="e.g., dementia, heart failure, diabetes"></textarea>
-    <label for="goals"><span class="classkey">Goals of Care:</span></label>
-    <select id="goals" class="classdata">
-      <option value="Symptom control">Symptom control</option>
-      <option value="Life extension">Life extension</option>
-      <option value="Functional improvement">Functional improvement</option>
-    </select>
-    <label for="prognosis"><span class="classkey">Prognosis (Life Expectancy):</span></label>
-    <select id="prognosis" class="classdata">
-      <option value="Limited (<1 year)">Limited (&lt;1 year)</option>
-      <option value="Moderate (1-5 years)">Moderate (1-5 years)</option>
-      <option value="Good (>5 years)">Good (&gt;5 years)</option>
-    </select>
-    <label for="medications"><span class="classkey">Enter Medications (comma separated):</span></label>
-    <textarea id="medications" class="classdata" rows="3" placeholder="e.g., diazepam, sertraline"></textarea>
-    <button onclick="checkDeprescribing()">Check Deprescribing</button>
-    <button onclick="downloadSummary()">Download Summary</button>
+  <div class="container">
+    <div class="sidebar">
+      <h2>F.R.A.M.E Framework</h2>
+      <p><strong>F – Fortify Trust</strong><br>
+      <em>Build a foundation of empathy and safety before discussing medication changes.</em><br>
+      "I know you've been through a lot, and every medication you take has a story behind it. Before we talk about any changes, I want to understand what's most important to you in your care moving forward."
+      </p>
+      <p><strong>R – Recognize Willingness or Barriers</strong><br>
+      <em>Explore patient readiness and concerns using open-ended questions</em><br>
+      "Do you feel like you're taking too many, too few, or just the right amount of medications?"<br>
+      "Are any of your medications hard to manage or causing side effects?"
+      </p>
+      <p><strong>A – Align with Goals of Care</strong><br>
+      <em>Connect deprescribing to the patient’s personal goals or what matters most to them.</em><br>
+      "You told me that being comfortable and spending quality time with your family is what matters most to you now. Some of your medications, like your cholesterol tablet, may no longer be helping you feel better at this stage. We can look at simplifying things to reduce side effects and focus on comfort."
+      </p>
+      <p><strong>M – Manage Cognitive Dissonance</strong><br>
+      <em>Address internal conflict about stopping medications using direct, emotional, or educational approaches.</em><br>
+      <strong>Direct:</strong> "You're taking over ten medications now, and I’m concerned this may be too many for your body to handle comfortably at this stage."<br>
+      <strong>Emotional:</strong> "I'm worried your sleeping tablets might be affecting your balance. My goal is to help you feel safer and clearer during the day."<br>
+      <strong>Educational:</strong> "This brochure explains some risks of long-term benzodiazepine use. Have a read before our next visit, and we can talk through your thoughts then."
+      </p>
+      <p><strong>E – Empower Continued Conversations</strong><br>
+      <em>Reassure patients that deprescribing is a process and encourage shared decision-making.</em><br>
+      "We don’t need to decide everything today. Let’s keep talking and adjust things as your needs change."
+      </p>
+    </div>
+    <div class="main-content">
+      <h1>Deprescribing Tool</h1>
+      <div class="form-section">
+        <label for="age"><span class="classkey">Patient Age:</span></label>
+        <input type="number" id="age" class="classdata" />
+        <label for="weight"><span class="classkey">Patient Weight (kg):</span></label>
+        <input type="number" id="weight" class="classdata" />
+        <label for="conditions"><span class="classkey">Chronic Conditions (comma separated):</span></label>
+        <textarea id="conditions" class="classdata" rows="2" placeholder="e.g., dementia, heart failure, diabetes"></textarea>
+        <label for="goals"><span class="classkey">Goals of Care:</span></label>
+        <select id="goals" class="classdata">
+          <option value="Symptom control">Symptom control</option>
+          <option value="Life extension">Life extension</option>
+          <option value="Functional improvement">Functional improvement</option>
+        </select>
+        <label for="prognosis"><span class="classkey">Prognosis (Life Expectancy):</span></label>
+        <select id="prognosis" class="classdata">
+          <option value="Limited (<1 year)">Limited (&lt;1 year)</option>
+          <option value="Moderate (1-5 years)">Moderate (1-5 years)</option>
+          <option value="Good (>5 years)">Good (&gt;5 years)</option>
+        </select>
+        <label for="medications"><span class="classkey">Enter Medications (comma separated):</span></label>
+        <textarea id="medications" class="classdata" rows="3" placeholder="e.g., diazepam, sertraline"></textarea>
+        <button onclick="checkDeprescribing()">Check Deprescribing</button>
+        <button onclick="downloadSummary()">Download Summary</button>
+      </div>
+      <div id="output"></div>
+    </div>
   </div>
-  <div id="output"></div>
 </body>
 </html>
